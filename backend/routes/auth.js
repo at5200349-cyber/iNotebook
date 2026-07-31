@@ -82,7 +82,7 @@ router.post(
           id: user.id,
         },
       };
-      const token = jwt.sign(data, JWT_SECRET, { expiresIn: "1d" });
+      const token = jwt.sign(data, JWT_SECRET);
       res.json({ token });
     } catch (err) {
       console.log(err.message);
