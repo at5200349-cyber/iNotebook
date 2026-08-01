@@ -91,4 +91,26 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
 
 
 
+router.delete("/deletenote/:id", fetchuser, async (req, res) => {   
+  try {
+    // Find the note to be deleted and delete it
+    let note = await Note.findById(req.params.id);
+    if (!note) {
+      return res.status(404).json({ error: "Note not found" });
+    }
+    // Check if the user is the owner of the note
+    if (note.user.toString() !== req.user.id) {
+      return res.status(401).json({ error: "Not allowed" });
+    }
+    note = await Note.findByIdAndDelete(req.params.id);
+    res.json({ message: "Note deleted successfully" });
+  }
+  catch (err) {
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+    
+});
+
+
+
 module.exports = router
