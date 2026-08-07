@@ -8,15 +8,15 @@ import NoteState from './context/notes/NotesState';
 function App() {
   return (
   <>
-  <NoteState>
+<NoteState>
   <Navbar/>
   <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/about" element={<About/>}/>
 
   </Routes>
-  </NoteState>
-
+ 
+</NoteState>
   </>
   );
 }
