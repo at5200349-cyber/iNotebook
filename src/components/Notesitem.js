@@ -8,6 +8,12 @@ const Notesitem = (props) => {
   <div className="px-6 py-4">
     <div className="font-bold text-xl mb-2">{note.title}</div>
     <p className="text-gray-700">{note.description}</p>
+    <div className="flex justify-end gap-4 mt-4">
+  <i className="fa-solid fa-pen-to-square text-blue-500 cursor-pointer hover:text-blue-700" title="Edit"></i>
+
+  <i className="fa-solid fa-trash text-red-500 cursor-pointer hover:text-red-700" title="Delete"></i>
+</div>
+ 
   </div>
 </div>
     </>
