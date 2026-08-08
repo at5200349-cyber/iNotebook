@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { mode, setMode } = props;
   const location = useLocation();
   return (
     <nav className=" bg-gray-600 shadow-md">
@@ -33,11 +34,17 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="space-x-3">
-          <button className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition">
+          <button className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition dark:bg-pink-400 dark:text-white dark:hover:bg-pink-600   ">
             Login{" "}
           </button>
-          <button className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition">
+          <button className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition dark:bg-pink-400 dark:text-white dark:hover:bg-pink-600">
             Sing up
+          </button>
+          <button
+            onClick={() => setMode(!mode)}
+            className="px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700"
+          >
+            {mode ? "☀️" : "🌙"}
           </button>
         </div>
       </div>
