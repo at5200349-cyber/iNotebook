@@ -1,4 +1,5 @@
 import React from 'react'
+import Deletenotes from './Deletenotes';
 
 const Notesitem = (props) => {
      const {note}=props;
@@ -11,7 +12,7 @@ const Notesitem = (props) => {
     <div className="flex justify-end gap-4 mt-4">
   <i className="fa-solid fa-pen-to-square text-blue-500 cursor-pointer hover:text-blue-700" title="Edit"></i>
 
-  <i className="fa-solid fa-trash text-red-500 cursor-pointer hover:text-red-700" title="Delete"></i>
+  <Deletenotes note={note}/>
 </div>
  
   </div>

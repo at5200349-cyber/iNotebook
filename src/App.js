@@ -25,10 +25,14 @@ function App() {
   return (
   <>
 <NoteState>
-  <Navbar/><Alert
+  <Navbar/>
+  <div className="fixed top-16 left-0 right-0 z-50">
+     <Alert
           message={alert?.message}
           type={alert?.type}
         />
+  </div>
+ 
   
   <Routes>
     <Route path="/" element={<Home/>}/>
