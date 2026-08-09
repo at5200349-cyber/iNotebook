@@ -7,7 +7,9 @@ import { Routes, Route } from "react-router-dom";
 import NoteState from './context/notes/NotesState';
 import Alert from './components/Alert';
 import { useState ,useEffect} from 'react';
-
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 
 
@@ -45,6 +47,9 @@ function App() {
   <Routes>
     <Route path="/" element={<Home/>}/>
     <Route path="/about" element={<About/>}/>
+    <Route path="/signup" element={<Signup/>}/>
+    <Route path="/login" element={<Login/>}/>
+    <Route path="/dashboard" element={<Dashboard/>}/>
 
   </Routes>
  </div>

@@ -45,7 +45,7 @@ router.post(
           id: user.id,
         },
       };
-      const token = jwt.sign(data, JWT_SECRET, { expiresIn: "1d" });
+      const token = jwt.sign(data, JWT_SECRET);
       // console.log(token)
       res.json({ token });
     } catch (error) {
@@ -70,10 +70,14 @@ router.post(
     }
     const { email, password } = req.body;
     try {
+    //  console.log("Emailreceived:", email);
+    //  console.log("Password received:", password);
       let user = await User.findOne({ email });
+      // console.log("User found:", user);
       if (!user)
         return res.status(400).json({ error: "Invaild email or password" });
       const passwordcompare = await bcrypt.compare(password, user.password);
+      // console.log("Password comparison result:", passwordcompare);
       if (!passwordcompare) {
         return res.status(400).json({ error: "Invalid email or password" });
       }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
+
 const Navbar = (props) => {
   const { mode, setMode } = props;
   const location = useLocation();
@@ -34,12 +35,18 @@ const Navbar = (props) => {
           </Link>
         </div>
         <div className="space-x-3">
-          <button className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition dark:bg-pink-400 dark:text-white dark:hover:bg-pink-600   ">
-            Login{" "}
-          </button>
-          <button className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition dark:bg-pink-400 dark:text-white dark:hover:bg-pink-600">
-            Sing up
-          </button>
+         <Link
+            to="/login"
+            className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition dark:bg-pink-400 dark:text-white dark:hover:bg-pink-600"
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            className="px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-gray-200 transition dark:bg-pink-400 dark:text-white dark:hover:bg-pink-600"
+          >
+            Sign up
+          </Link>
           <button
             onClick={() => setMode(!mode)}
             className="px-3 py-2 rounded-lg bg-gray-200 dark:bg-gray-700"

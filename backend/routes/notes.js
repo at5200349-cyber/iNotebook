@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator");
 //ROUTE 1: Get all the notes of the logged in user using: GET "/api/notes/getuser".Login required
 router.get("/fetchallnotes", fetchuser, async (req, res) => {
   try {
-    const notes = await Notes.find({ user: req.user.id });
+    const notes = await Note.find({ user: req.user.id });
     res.json(notes);
   } catch (error) {
     return res.status(500).json({ error: "Internal Server Error" });

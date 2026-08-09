@@ -1,6 +1,6 @@
 import React from 'react'
 import Deletenotes from './Deletenotes';
-
+import Editnotes from './Editnotes';
 const Notesitem = (props) => {
      const {note}=props;
   return (
@@ -10,7 +10,7 @@ const Notesitem = (props) => {
     <div className="font-bold text-xl mb-2">{note.title}</div>
     <p className="text-gray-700 dark:text-white">{note.description}</p>
     <div className="flex justify-end gap-4 mt-4">
-  <i className="fa-solid fa-pen-to-square text-blue-500 cursor-pointer hover:text-blue-700  dark:text-pink-500 " title="Edit" ></i>
+ <Editnotes note={note}/>
 
   <Deletenotes note={note}/>
 </div>

@@ -6,7 +6,7 @@ import Notesitem from "./Notesitem";
 
 
 const Notes = () => {
-      const {notes,setNotes}=useContext(notecontext);
+      const {notes, fetchNotes}=useContext(notecontext);
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
