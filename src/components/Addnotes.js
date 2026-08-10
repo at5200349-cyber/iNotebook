@@ -9,14 +9,14 @@ const Addnotes = () => {
     
 
 
-    const handleAddNote = (e) => {
+    const handleAddNote =async (e) => {
         e.preventDefault();
         if(note.title.trim() === "" || note.description.trim() === "") {
             // i ADD ALERT HERE
             return;
         }
 
-        addNote(note.title, note.description, note.tag);
+        await addNote(note.title, note.description, note.tag);
         setNote({title:"",description:"",tag:"default"});
 
 

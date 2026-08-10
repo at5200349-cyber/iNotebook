@@ -3,61 +3,90 @@ import Notecontext from "./Notecontext";
 import { useState } from "react";
 
 const NoteState = (props) => {
-
-
   const [notes, setNotes] = useState([]);
   const fetchNotes = async () => {
-    const response = await fetch("http://localhost:5000/api/notes/fetchallnotes", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"),
-      }
-    });
+  try{  const response = await fetch(
+      "http://localhost:5000/api/notes/fetchallnotes",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      },
+    );
     const json = await response.json();
-    setNotes(json);
+    setNotes(json);}
+    catch(err){
+      console.error("Error fetching notes:", err);
+      alert("An error occurred while fetching notes. Please try again.");
+    }
   };
 
   //Add a note
-  const addNote = (title, description, tag) => {
-    // const note = {
-    //   user: "6a75cfb1a6f8f7964013c862",
-    //   title: title,
-    //   description: description,
-    //   tag: tag,
-    //   _id: "6a75d0e9a6f8f796334013c863",
-    //   date: "2026-08-07T12:34:49.834Z",
-    //   __v: 0,
-    // };
-    // setNotes((prevNotes) => [...prevNotes, note]);
+  const addNote = async (title, description, tag) => {
+   try{ const response = await fetch("http://localhost:5000/api/notes/addnote", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify({ title, description, tag }),
+    });
+    const json = await response.json();
+    setNotes((prevNotes) => [...prevNotes, json]);
+  }
+  catch(err){
+    console.error("Error adding note:", err);
+    alert("An error occurred while adding the note. Please try again.");
+  }
   };
   //Delete a note
-  const deleteNote = (id) => {
-    const newNotes = notes.filter((note) => note._id !== id);
-    setNotes(newNotes);
+  const deleteNote = async (id) => {
+    try{const response = await fetch(`http://localhost:5000/api/notes/deletenote/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    const json = await response.json();
+    if(json.success) {
+      alert("Note deleted successfully");
+    
+    setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));}
+    else {
+      alert("Failed to delete note");
+    }}
+    catch(err){
+      console.error("Error deleting note:", err);
+      alert("An error occurred while deleting the note. Please try again.");
+    }
   };
 
   //Edit a note
- const editNote = (id, title, description, tag) => {
+  const editNote = (id, title, description, tag) => {
     setNotes(
-        notes.map((note) => {
-            if (note._id === id) {
-                return {
-                    ...note,
-                    title: title,
-                    description: description,
-                    tag: tag
-                };
-            }
+      notes.map((note) => {
+        if (note._id === id) {
+          return {
+            ...note,
+            title: title,
+            description: description,
+            tag: tag,
+          };
+        }
 
-            return note;
-        })
+        return note;
+      }),
     );
-};
+  };
 
   return (
     <>
-      <Notecontext.Provider value={{ notes, addNote, deleteNote, editNote ,fetchNotes}}>
+      <Notecontext.Provider
+        value={{ notes, addNote, deleteNote, editNote, fetchNotes }}
+      >
         {props.children}
       </Notecontext.Provider>
     </>
