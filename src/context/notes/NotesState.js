@@ -23,6 +23,9 @@ const NoteState = (props) => {
     }
   };
 
+
+
+
   //Add a note
   const addNote = async (title, description, tag) => {
    try{ const response = await fetch("http://localhost:5000/api/notes/addnote", {
@@ -41,6 +44,11 @@ const NoteState = (props) => {
     alert("An error occurred while adding the note. Please try again.");
   }
   };
+
+
+
+
+
   //Delete a note
   const deleteNote = async (id) => {
     try{const response = await fetch(`http://localhost:5000/api/notes/deletenote/${id}`, {
@@ -64,22 +72,36 @@ const NoteState = (props) => {
     }
   };
 
-  //Edit a note
-  const editNote = (id, title, description, tag) => {
-    setNotes(
-      notes.map((note) => {
-        if (note._id === id) {
-          return {
-            ...note,
-            title: title,
-            description: description,
-            tag: tag,
-          };
-        }
 
-        return note;
-      }),
+
+
+
+
+  //Edit a note
+  const editNote = async (id, title, description, tag) => {
+   try{ const response=await fetch(`http://localhost:5000/api/notes/updatenote/${id}`, {
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        "auth-token":localStorage.getItem("token")},
+        body:JSON.stringify({title,description,tag})  
+    })
+    const json=await response.json();
+    
+   if(json.success) { 
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note._id === id ? { ...note, title, description, tag } : note
+      )
     );
+    return true;
+   }
+   return false;
+  }
+  catch(err){
+    console.error("Error editing note:", err);
+    alert("An error occurred while editing the note. Please try again.");}
+    return false;
   };
 
   return (

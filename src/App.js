@@ -10,6 +10,7 @@ import { useState ,useEffect} from 'react';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import Editnoteswindow from './components/Editnoteswindow';
 
 
 
@@ -50,7 +51,7 @@ function App() {
     <Route path="/signup" element={<Signup/>}/>
     <Route path="/login" element={<Login/>}/>
     <Route path="/dashboard" element={<Dashboard/>}/>
-
+    <Route path="/editnote/:id" element={<Editnoteswindow/>}/>
   </Routes>
  </div>
  </div>
